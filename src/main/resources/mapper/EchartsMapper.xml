@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kp.mall.basic.mapper.EchartsMapper">
+
+    <select id="countUserByStatus" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT CASE status WHEN 1 THEN '正常' WHEN 0 THEN '禁用' WHEN 2 THEN '锁定' END AS name, COUNT(*) AS value FROM user WHERE 1=1 <if test="status != null and status != -1"> <if test="status != null and status != -1">AND status = #{status}</if> </if> GROUP BY status
+    </select>
+
+    <select id="countBlogByCategory" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT bc.category_name AS name, COUNT(b.id) AS value FROM blog b LEFT JOIN blog_category bc ON b.category_id = bc.id WHERE 1=1 <if test="status != null and status != -1"> <if test="status != null and status != -1">AND b.status = #{status}</if> </if> GROUP BY bc.category_name
+    </select>
+
+    <select id="countIntegralByType" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT CASE integral_type WHEN 1 THEN '获取' WHEN 2 THEN '消耗' END AS name, SUM(integral_num) AS value FROM integral_record WHERE 1=1 <if test="startTime != null and startTime != ''"> AND create_time &gt;= #{startTime} </if> <if test="endTime != null and endTime != ''"> AND create_time &lt;= #{endTime} </if> GROUP BY integral_type
+    </select>
+
+    <select id="countOrderByStatus" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT CASE order_status WHEN 0 THEN '待支付' WHEN 1 THEN '待发货' WHEN 2 THEN '待收货' WHEN 3 THEN '已完成' WHEN 4 THEN '已取消' END AS name, COUNT(*) AS value FROM order_info WHERE 1=1 <if test="payStatus != null and payStatus != -1"> <if test="payStatus != null and payStatus != -1">AND pay_status = #{payStatus}</if> </if> GROUP BY order_status
+    </select>
+
+    <select id="countUserLoginByTime" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT DATE_FORMAT(last_login_time, '%Y-%m-%d') AS name, COUNT(*) AS value FROM user WHERE 1=1 <if test="startTime != null and startTime != ''"> AND last_login_time &gt;= #{startTime} </if> <if test="endTime != null and endTime != ''"> AND last_login_time &lt;= #{endTime} </if> GROUP BY DATE_FORMAT(last_login_time, '%Y-%m-%d') ORDER BY name
+    </select>
+
+    <select id="countProductByType" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT CASE product_type WHEN 1 THEN '普通商品' WHEN 2 THEN '虚拟商品' END AS name, COUNT(*) AS value FROM product WHERE 1=1 <if test="status != null and status != -1"> <if test="status != null and status != -1">AND status = #{status}</if> </if> GROUP BY product_type
+    </select>
+
+    <!-- 销售额统计：按月份汇总已支付订单实付金额 -->
+    <select id="countSalesAmountByMonth" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT DATE_FORMAT(pay_time, '%Y-%m') AS name, IFNULL(SUM(pay_amount), 0) AS value
+        FROM order_info
+        WHERE pay_status = 1 AND pay_time IS NOT NULL
+        <if test="startTime != null and startTime != ''">AND pay_time &gt;= #{startTime}</if>
+        <if test="endTime != null and endTime != ''">AND pay_time &lt;= #{endTime}</if>
+        GROUP BY DATE_FORMAT(pay_time, '%Y-%m')
+        ORDER BY name
+    </select>
+
+    <!-- 销售数量统计：按月份汇总已支付订单的商品件数 -->
+    <select id="countSalesQuantityByMonth" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT DATE_FORMAT(o.pay_time, '%Y-%m') AS name, IFNULL(SUM(i.product_num), 0) AS value
+        FROM order_item i
+        INNER JOIN order_info o ON i.order_id = o.id
+        WHERE o.pay_status = 1 AND o.pay_time IS NOT NULL
+        <if test="startTime != null and startTime != ''">AND o.pay_time &gt;= #{startTime}</if>
+        <if test="endTime != null and endTime != ''">AND o.pay_time &lt;= #{endTime}</if>
+        GROUP BY DATE_FORMAT(o.pay_time, '%Y-%m')
+        ORDER BY name
+    </select>
+
+    <!-- 积分使用情况：按来源统计消耗的积分（integral_type=2） -->
+    <select id="countIntegralConsumeBySource" resultType="com.kp.mall.vo.EchartsDataVO">
+        SELECT
+            CASE integral_source
+                WHEN 5 THEN '订单抵扣'
+                ELSE CONCAT('其他(', integral_source, ')')
+            END AS name,
+            SUM(integral_num) AS value
+        FROM integral_record
+        WHERE integral_type = 2
+        <if test="startTime != null and startTime != ''">AND create_time &gt;= #{startTime}</if>
+        <if test="endTime != null and endTime != ''">AND create_time &lt;= #{endTime}</if>
+        GROUP BY integral_source
+        ORDER BY value DESC
+    </select>
+
+</mapper>

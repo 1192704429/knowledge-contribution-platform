@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kp.mall.module.order_item.mapper.OrderItemMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND orderItem.id = #{entity.id}
+            </if>
+            <if test="entity.orderId != null">
+                AND orderItem.order_id = #{entity.orderId}
+            </if>
+            <if test="entity.orderCode != null and entity.orderCode != ''">
+                AND orderInfo.order_code LIKE CONCAT('%', #{entity.orderCode}, '%')
+            </if>
+            <if test="entity.productName2 != null and entity.productName2 != ''">
+                AND product.product_name LIKE CONCAT('%', #{entity.productName2}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.kp.mall.module.order_item.entity.OrderItem">
+        SELECT orderItem.*
+        , orderInfo.order_code AS orderCode
+        , product.product_name AS productName2
+        FROM order_item orderItem
+        LEFT JOIN order_info orderInfo ON orderItem.order_id = orderInfo.id
+        LEFT JOIN product product ON orderItem.product_id = product.id
+        <include refid="whereCondition"/>
+        ORDER BY orderItem.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM order_item orderItem
+        LEFT JOIN order_info orderInfo ON orderItem.order_id = orderInfo.id
+        LEFT JOIN product product ON orderItem.product_id = product.id
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.kp.mall.module.order_item.entity.OrderItem">
+        SELECT orderItem.*
+        , orderInfo.order_code AS orderCode
+        , product.product_name AS productName2
+        FROM order_item orderItem
+        LEFT JOIN order_info orderInfo ON orderItem.order_id = orderInfo.id
+        LEFT JOIN product product ON orderItem.product_id = product.id
+        <include refid="whereCondition"/>
+        ORDER BY orderItem.create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.kp.mall.module.order_item.entity.OrderItem">
+        SELECT orderItem.*
+        , orderInfo.order_code AS orderCode
+        , product.product_name AS productName2
+        FROM order_item orderItem
+        LEFT JOIN order_info orderInfo ON orderItem.order_id = orderInfo.id
+        LEFT JOIN product product ON orderItem.product_id = product.id
+        WHERE orderItem.id = #{id}
+    </select>
+
+</mapper>

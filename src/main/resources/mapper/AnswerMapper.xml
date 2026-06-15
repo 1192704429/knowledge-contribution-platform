@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kp.mall.module.answer.mapper.AnswerMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND answer.id = #{entity.id}
+            </if>
+            <if test="entity.questionId != null">
+                AND answer.question_id = #{entity.questionId}
+            </if>
+            <if test="entity.answerGrade != null">
+                AND answer.answer_grade = #{entity.answerGrade}
+            </if>
+            <if test="entity.auditStatus != null">
+                AND answer.audit_status = #{entity.auditStatus}
+            </if>
+            <if test="entity.status != null">
+                AND answer.status = #{entity.status}
+            </if>
+            <if test="entity.title != null and entity.title != ''">
+                AND question.title LIKE CONCAT('%', #{entity.title}, '%')
+            </if>
+            <if test="entity.userName != null and entity.userName != ''">
+                AND user.user_name LIKE CONCAT('%', #{entity.userName}, '%')
+            </if>
+            <if test="entity.adminName != null and entity.adminName != ''">
+                AND admin.admin_name LIKE CONCAT('%', #{entity.adminName}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.kp.mall.module.answer.entity.Answer">
+        SELECT answer.*
+        , question.title AS title
+        , user.user_name AS userName
+        , user.avatar AS avatar
+        , admin.admin_name AS adminName
+        FROM answer answer
+        LEFT JOIN question question ON answer.question_id = question.id
+        LEFT JOIN user user ON answer.user_id = user.id
+        LEFT JOIN admin admin ON answer.audit_admin_id = admin.id
+        <include refid="whereCondition"/>
+        ORDER BY answer.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM answer answer
+        LEFT JOIN question question ON answer.question_id = question.id
+        LEFT JOIN user user ON answer.user_id = user.id
+        LEFT JOIN admin admin ON answer.audit_admin_id = admin.id
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.kp.mall.module.answer.entity.Answer">
+        SELECT answer.*
+        , question.title AS title
+        , user.user_name AS userName
+        , user.avatar AS avatar
+        , admin.admin_name AS adminName
+        FROM answer answer
+        LEFT JOIN question question ON answer.question_id = question.id
+        LEFT JOIN user user ON answer.user_id = user.id
+        LEFT JOIN admin admin ON answer.audit_admin_id = admin.id
+        <include refid="whereCondition"/>
+        ORDER BY answer.create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.kp.mall.module.answer.entity.Answer">
+        SELECT answer.*
+        , question.title AS title
+        , user.user_name AS userName
+        , user.avatar AS avatar
+        , admin.admin_name AS adminName
+        FROM answer answer
+        LEFT JOIN question question ON answer.question_id = question.id
+        LEFT JOIN user user ON answer.user_id = user.id
+        LEFT JOIN admin admin ON answer.audit_admin_id = admin.id
+        WHERE answer.id = #{id}
+    </select>
+
+</mapper>

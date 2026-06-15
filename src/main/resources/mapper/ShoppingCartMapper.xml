@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kp.mall.module.shopping_cart.mapper.ShoppingCartMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND shoppingCart.id = #{entity.id}
+            </if>
+            <if test="entity.userId != null">
+                AND shoppingCart.user_id = #{entity.userId}
+            </if>
+            <if test="entity.productId != null">
+                AND shoppingCart.product_id = #{entity.productId}
+            </if>
+            <if test="entity.userName != null and entity.userName != ''">
+                AND user.user_name LIKE CONCAT('%', #{entity.userName}, '%')
+            </if>
+            <if test="entity.productName != null and entity.productName != ''">
+                AND product.product_name LIKE CONCAT('%', #{entity.productName}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.kp.mall.module.shopping_cart.entity.ShoppingCart">
+        SELECT shoppingCart.*
+        , user.user_name AS userName
+        , product.product_name AS productName
+        FROM shopping_cart shoppingCart
+        LEFT JOIN user user ON shoppingCart.user_id = user.id
+        LEFT JOIN product product ON shoppingCart.product_id = product.id
+        <include refid="whereCondition"/>
+        ORDER BY shoppingCart.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM shopping_cart shoppingCart
+        LEFT JOIN user user ON shoppingCart.user_id = user.id
+        LEFT JOIN product product ON shoppingCart.product_id = product.id
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.kp.mall.module.shopping_cart.entity.ShoppingCart">
+        SELECT shoppingCart.*
+        , user.user_name AS userName
+        , product.product_name AS productName
+        , product.cover_img AS productCoverImg
+        , product.price AS productPrice
+        , product.integral AS productIntegral
+        , product.stock AS productStock
+        FROM shopping_cart shoppingCart
+        LEFT JOIN user user ON shoppingCart.user_id = user.id
+        LEFT JOIN product product ON shoppingCart.product_id = product.id
+        <include refid="whereCondition"/>
+        ORDER BY shoppingCart.create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.kp.mall.module.shopping_cart.entity.ShoppingCart">
+        SELECT shoppingCart.*
+        , user.user_name AS userName
+        , product.product_name AS productName
+        , product.cover_img AS productCoverImg
+        , product.price AS productPrice
+        , product.integral AS productIntegral
+        , product.stock AS productStock
+        FROM shopping_cart shoppingCart
+        LEFT JOIN user user ON shoppingCart.user_id = user.id
+        LEFT JOIN product product ON shoppingCart.product_id = product.id
+        WHERE shoppingCart.id = #{id}
+    </select>
+
+    <!-- 根据用户ID和商品ID查询（用于加购时合并数量） -->
+    <select id="selectByUserIdAndProductId" resultType="com.kp.mall.module.shopping_cart.entity.ShoppingCart">
+        SELECT * FROM shopping_cart
+        WHERE user_id = #{userId} AND product_id = #{productId}
+        LIMIT 1
+    </select>
+
+</mapper>

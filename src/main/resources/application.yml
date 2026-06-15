@@ -1,0 +1,93 @@
+server:
+  port: 8092
+spring:
+  profiles:
+    active: dev
+  application:
+    name: knowledge_point_platform # 应用名称(也做为SHA-256加解密的盐值)
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/jfsc?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=Asia/Shanghai&connectionCollation=utf8mb4_unicode_ci
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  # Redis
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:    # 无密码留空
+      database: 0
+      timeout: 5000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
+  # 邮件发送开始
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 1192704429@qq.com  # 替换为您的QQ邮箱地址
+    password: cjfvrpajqimvhgdb  # 替换为您的QQ邮箱授权码
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+# 本地文件上传配置开始
+file:
+  upload-dir: D:\\uploads\\  # 上传文件的目录
+  access-url: http://localhost:${server.port}/uploads  # 访问文件的URL前缀
+# 本地文件上传配置结束
+
+secret-key: 1234567890123456 # 密钥(默认值)
+check-captcha: false  # 是否开启验证码校验
+
+mybatis-plus:
+  #sql语句Xml扫描
+  mapper-locations: classpath:/mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.kp.mall.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型 AUTO:"数据库ID自增",INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)",UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      logic-delete-field: 1
+      logic-not-delete-value: 0
+    banner: false
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+
+
+# 通用大模型聊天接口配置（DeepSeek / OpenAI 风格）
+ai-chat:
+  api-url: https://api.deepseek.com/chat/completions   # 默认使用 DeepSeek，可按需替换
+  api-key: sk-666       # 在这里配置 DeepSeek 或其他厂商的 API Key
+  model: deepseek-chat                              # 模型 ID，如 deepseek-chat、gpt-4.1 等
+
+
+alipay:
+  appId: 9021000122677038
+  merchantPrivateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCMWim9GJs9fJYnP8b0+UzVoeomxlk/So6wRw3XncmnJFtBuJA5r8O60aexaFRqZH/oUcHJ8FjR3VojS0SUedJyZCo5uZKxtOgpVkuVMtZDuQqH+VRz6FhwbjsV17LO2KNVGNWfmtlWBuDV9ruDqonv05XHxVDb++Pk40Q/HqL50tn2hcoQ1Dlc8HeAe6jlWEHE1J7MT1rAXs0pVL+huyr+2A6y5Xdx+JoB47wHu4skIScRBlvaGbFZsEwtdfodG3IgRQ8JF61XJvdXwcFfTZvV54Z7jrJcEqRlTUstliGuy3lYdjPM/Zv3xEUAft3n6jFxWJoyeVWJz5MxSCoz5pXtAgMBAAECggEABL3PBypbpDofQHgxGnmJlPYBWQn+XdsA8weTeiNEercJtjCr/qbnb9pBVgb2QxneEFUivNW3ym816ldSm8l5yI+FtamFQSehaDQYHZQ4FNWde3Z62eeRhUrUCCrfSYmcCvXp0ZiDmxpkYhYRw6LxQf7d4n/R+XyK+GKNHazFSLc//n88TmFDPEpeirdyMVF9y8KAOER8IMhInSBBOFRaMLUwyLuRFZ4+ZLzwjjC3OVzqkdBCMvL9s4sz7DpiZGMoNLN4Lk7Ve68plDVymvCdsOVcjjXEtcCk63LhAkHstdMrmuvCBc1TnQ/17UdgqiijAFjvnOO3JtDi4ABa4B2IAQKBgQDH5HtxisEweWNTdEn1yXtixt27OYtwDt5ejWsx1Jssspxy3uvu8ZGzpS6TubmrTslGPRaUkak8UDhjuVgR41DwtotXIkahgtsZsY3rlkgmATo1s3PiKizoeGnXodkq7V5UIFCEeXDWsueU536hAojlc/Ca+uxgwGgh+W9lvMa47QKBgQCzv1cHoPMqePz46JUI0Pj0ld10BOyScD1wEJiTDXandE/JZO50Ps2TdYdzVQd+AM2YXEgd3Tr2Pz8UsHBkyIckO7490wriX+ZuBoRy/ogL+NzJUL1HlAZDbi8E386onsB2nFrDuk15X0ZB4Gx42Ed+SjC7P32wRgvml+gpAdSxAQKBgAs/qFKzZDu+GQDRQng6Zl8gocmva1FbBNh9TNL5C+JwCq3MLaq8nV5mpUBa6z/gpyL0vRiPOd7TBNlXzMT07dEd9KlqnF7qZjoD6+CeDGFXIFd1ScgoZ26NmCcyTG5F/VDuoJlT3C24059lh5K3+cwvwhJ2nGa1bSa8SrCG9wfhAoGAVB71DPXvN25d/eNjdDfQey7z8Asp6DKtHhg2P4Pqht3xRTB+RFrr/NnhJUGi+v5HOcneWlOh94KL9BPK1e/fBz8KfoaZLm5xOgbEz8h9RRUXxwOJQclt0Prs+FwBrHp3Wks8UyOKhIXpLIVqXnfhpaH1AnzpRqjRgv6OwTpBHwECgYEAo7RS7uThfv1pTC9wx0krZwbnT78onFWR+AU8DPFfzNtd7qjdh22GOq/WKyYO++fa4c7UAPAOdA/ztEKKxw5QEJtEQMUZzojzwxbSNupFOPul6YPmB2oU+c750m8t5O9z8SNGQ0XquMgCMslY6nP4m3WFmZhmkwni0+zM8Hn3TCU=
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjFopvRibPXyWJz/G9PlM1aHqJsZZP0qOsEcN153JpyRbQbiQOa/DutGnsWhUamR/6FHByfBY0d1aI0tElHnScmQqObmSsbToKVZLlTLWQ7kKh/lUc+hYcG47FdeyztijVRjVn5rZVgbg1fa7g6qJ79OVx8VQ2/vj5ONEPx6i+dLZ9oXKENQ5XPB3gHuo5VhBxNSezE9awF7NKVS/obsq/tgOsuV3cfiaAeO8B7uLJCEnEQZb2hmxWbBMLXX6HRtyIEUPCRetVyb3V8HBX02b1eeGe46yXBKkZU1LLZYhrst5WHYzzP2b98RFAH7d5+oxcViaMnlVic+TMUgqM+aV7QIDAQAB
+  notifyUrl:  http://dd6dc92a.natappfree.cc/alipay/notify
+  returnUrl:  http://localhost:3001/#/user/pay-success
+  signType: RSA2
+  charset: utf-8
+  # 我的支付宝网关地址
+  gatewayUrl: https://openapi-sandbox.dl.alipaydev.com/gateway.do

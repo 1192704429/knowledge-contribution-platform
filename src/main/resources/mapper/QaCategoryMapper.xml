@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kp.mall.module.qa_category.mapper.QaCategoryMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND qaCategory.id = #{entity.id}
+            </if>
+            <if test="entity.categoryName != null and entity.categoryName != ''">
+                AND qaCategory.category_name LIKE CONCAT('%', #{entity.categoryName}, '%')
+            </if>
+            <if test="entity.status != null">
+                AND qaCategory.status = #{entity.status}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.kp.mall.module.qa_category.entity.QaCategory">
+        SELECT qaCategory.*
+        FROM qa_category qaCategory
+        <include refid="whereCondition"/>
+        ORDER BY qaCategory.sort ASC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM qa_category qaCategory
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.kp.mall.module.qa_category.entity.QaCategory">
+        SELECT qaCategory.*
+        FROM qa_category qaCategory
+        <include refid="whereCondition"/>
+        ORDER BY qaCategory.sort ASC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.kp.mall.module.qa_category.entity.QaCategory">
+        SELECT qaCategory.*
+        FROM qa_category qaCategory
+        WHERE qaCategory.id = #{id}
+    </select>
+
+</mapper>

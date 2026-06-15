@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kp.mall.module.product.mapper.ProductMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND product.id = #{entity.id}
+            </if>
+            <if test="entity.productCode != null and entity.productCode != ''">
+                AND product.product_code LIKE CONCAT('%', #{entity.productCode}, '%')
+            </if>
+            <if test="entity.productName != null and entity.productName != ''">
+                AND product.product_name LIKE CONCAT('%', #{entity.productName}, '%')
+            </if>
+            <if test="entity.categoryId != null">
+                AND product.category_id = #{entity.categoryId}
+            </if>
+            <if test="entity.productType != null">
+                AND product.product_type = #{entity.productType}
+            </if>
+            <if test="entity.status != null">
+                AND product.status = #{entity.status}
+            </if>
+            <if test="entity.categoryName != null and entity.categoryName != ''">
+                AND productCategory.category_name LIKE CONCAT('%', #{entity.categoryName}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.kp.mall.module.product.entity.Product">
+        SELECT product.*
+        , productCategory.category_name AS categoryName
+        FROM product product
+        LEFT JOIN product_category productCategory ON product.category_id = productCategory.id
+        <include refid="whereCondition"/>
+        ORDER BY product.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM product product
+        LEFT JOIN product_category productCategory ON product.category_id = productCategory.id
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.kp.mall.module.product.entity.Product">
+        SELECT product.*
+        , productCategory.category_name AS categoryName
+        FROM product product
+        LEFT JOIN product_category productCategory ON product.category_id = productCategory.id
+        <include refid="whereCondition"/>
+        ORDER BY product.create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.kp.mall.module.product.entity.Product">
+        SELECT product.*
+        , productCategory.category_name AS categoryName
+        FROM product product
+        LEFT JOIN product_category productCategory ON product.category_id = productCategory.id
+        WHERE product.id = #{id}
+    </select>
+
+</mapper>

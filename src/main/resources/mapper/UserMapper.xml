@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kp.mall.module.user.mapper.UserMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND user.id = #{entity.id}
+            </if>
+            <if test="entity.userAccount != null and entity.userAccount != ''">
+                AND user.user_account LIKE CONCAT('%', #{entity.userAccount}, '%')
+            </if>
+            <if test="entity.userName != null and entity.userName != ''">
+                AND user.user_name LIKE CONCAT('%', #{entity.userName}, '%')
+            </if>
+            <if test="entity.userEmail != null and entity.userEmail != ''">
+                AND user.user_email LIKE CONCAT('%', #{entity.userEmail}, '%')
+            </if>
+            <if test="entity.gender != null">
+                AND user.gender = #{entity.gender}
+            </if>
+            <if test="entity.status != null">
+                AND user.status = #{entity.status}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.kp.mall.module.user.entity.User">
+        SELECT user.*
+        FROM user user
+        <include refid="whereCondition"/>
+        ORDER BY user.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM user user
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.kp.mall.module.user.entity.User">
+        SELECT user.*
+        FROM user user
+        <include refid="whereCondition"/>
+        ORDER BY user.create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.kp.mall.module.user.entity.User">
+        SELECT user.*
+        FROM user user
+        WHERE user.id = #{id}
+    </select>
+
+</mapper>

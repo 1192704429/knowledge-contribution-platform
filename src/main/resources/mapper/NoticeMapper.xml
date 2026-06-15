@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kp.mall.module.notice.mapper.NoticeMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND notice.id = #{entity.id}
+            </if>
+            <if test="entity.title != null and entity.title != ''">
+                AND notice.title LIKE CONCAT('%', #{entity.title}, '%')
+            </if>
+            <if test="entity.publishTimeStart != null and entity.publishTimeEnd != null">
+                AND notice.publish_time BETWEEN #{entity.publishTimeStart} AND #{entity.publishTimeEnd}
+            </if>
+            <if test="entity.status != null">
+                AND notice.status = #{entity.status}
+            </if>
+            <if test="entity.adminName != null and entity.adminName != ''">
+                AND admin.admin_name LIKE CONCAT('%', #{entity.adminName}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.kp.mall.module.notice.entity.Notice">
+        SELECT notice.*
+        , admin.admin_name AS adminName
+        FROM notice notice
+        LEFT JOIN admin admin ON notice.publisher_id = admin.id
+        <include refid="whereCondition"/>
+        ORDER BY notice.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM notice notice
+        LEFT JOIN admin admin ON notice.publisher_id = admin.id
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.kp.mall.module.notice.entity.Notice">
+        SELECT notice.*
+        , admin.admin_name AS adminName
+        FROM notice notice
+        LEFT JOIN admin admin ON notice.publisher_id = admin.id
+        <include refid="whereCondition"/>
+        ORDER BY notice.create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.kp.mall.module.notice.entity.Notice">
+        SELECT notice.*
+        , admin.admin_name AS adminName
+        FROM notice notice
+        LEFT JOIN admin admin ON notice.publisher_id = admin.id
+        WHERE notice.id = #{id}
+    </select>
+
+    <!-- 用户端分页查询（按发布时间排序） -->
+    <select id="pageQueryForUser" resultType="com.kp.mall.module.notice.entity.Notice">
+        SELECT notice.*
+        , admin.admin_name AS adminName
+        FROM notice notice
+        LEFT JOIN admin admin ON notice.publisher_id = admin.id
+        <include refid="whereCondition"/>
+        ORDER BY notice.publish_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 用户端查询总数 -->
+    <select id="countQueryForUser" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM notice notice
+        LEFT JOIN admin admin ON notice.publisher_id = admin.id
+        <include refid="whereCondition"/>
+    </select>
+
+</mapper>
