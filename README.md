@@ -16,7 +16,7 @@
 | 用户Web端 | 用户 | 注册登录、发布博客问答、积分获取与消费、商品购买与订单管理 |
 
 
-![功能模块图](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/azhou_promotion/img/module_structure/func_module_a4554843ef3241c4bcdbd396705d868a.png)
+![功能模块图](docs/images/01-func-module.png)
 
 
 ## 三、技术栈说明
@@ -51,55 +51,55 @@
 
 登录页：管理员输入登录信息，登录进入平台系统
 
-![登录页：管理员输入登录信息，登录进入平台系统](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/0f7df53d-50bc-4d31-8908-ea1b92839d02.png)
+![登录页：管理员输入登录信息，登录进入平台系统](docs/images/02-deng-lu.png)
 
 首页：展示平台各项业务数据的统计信息
 
-![首页：展示平台各项业务数据的统计信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/4d3fdffa-6852-4a38-8bc4-2cef93ed24b6.png)
+![首页：展示平台各项业务数据的统计信息](docs/images/03-shou-ye.png)
 
 用户管理页：管理员查询并管理平台内的用户信息
 
-![用户管理页：管理员查询并管理平台内的用户信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/4d3392cf-19d2-48c5-86d7-dcd2c49431e1.png)
+![用户管理页：管理员查询并管理平台内的用户信息](docs/images/04-yong-hu-guan-li.png)
 
 博客分类管理：管理员对博客分类信息进行管理维护
 
-![博客分类管理：管理员对博客分类信息进行管理维护](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/ea2fcbed-be34-4fdc-84fa-f88f78dc5317.png)
+![博客分类管理：管理员对博客分类信息进行管理维护](docs/images/05-bo-ke-fen-lei-guan-li.png)
 
 博客管理：管理员管理并审核所有用户发布的博客
 
-![博客管理：管理员管理并审核所有用户发布的博客](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/917d4fe1-7997-42e5-8d89-1555fc3c2a5d.png)
+![博客管理：管理员管理并审核所有用户发布的博客](docs/images/06-bo-ke-guan-li.png)
 
 问答分类管理：管理员查看并管理系统的问答分类
 
-![问答分类管理：管理员查看并管理系统的问答分类](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/463251a1-fb72-4b6f-8ee2-4cfb8ed5b722.png)
+![问答分类管理：管理员查看并管理系统的问答分类](docs/images/07-wen-da-fen-lei-guan-li.png)
 
 问答管理页：管理系统所有问答，支持对问答进行审核操作
 
-![问答管理页：管理系统所有问答，支持对问答进行审核操作](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/0d4ea1e5-a8a6-4c7d-85b8-511f1e01de6a.png)
+![问答管理页：管理系统所有问答，支持对问答进行审核操作](docs/images/08-wen-da-guan-li.png)
 
 回答管理：管理员查询并管理用户提交的问答回复
 
-![回答管理：管理员查询并管理用户提交的问答回复](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/d71d4f94-5b28-4f3e-87ba-ff4825037faf.png)
+![回答管理：管理员查询并管理用户提交的问答回复](docs/images/09-hui-da-guan-li.png)
 
 公告管理：管理员查询并管理平台的公告信息
 
-![公告管理：管理员查询并管理平台的公告信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/a0260d8a-e020-4afc-8d5d-fceaf73037b2.png)
+![公告管理：管理员查询并管理平台的公告信息](docs/images/10-gong-gao-guan-li.png)
 
 商品分类页：管理平台商品分类，支持增删改查操作
 
-![商品分类页：管理平台商品分类，支持增删改查操作](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/ca02c843-f6e5-4165-8267-41fdbaf079fa.png)
+![商品分类页：管理平台商品分类，支持增删改查操作](docs/images/11-shang-pin-fen-lei.png)
 
 商品管理：管理员管理积分兑换平台的商品信息
 
-![商品管理：管理员管理积分兑换平台的商品信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/be47003d-0fb6-4897-8b4e-cc95147472f1.png)
+![商品管理：管理员管理积分兑换平台的商品信息](docs/images/12-shang-pin-guan-li.png)
 
 订单管理页：管理员查询管理平台的所有订单信息
 
-![订单管理页：管理员查询管理平台的所有订单信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/8df6ff61-50e4-47e2-8d2e-e9952ab3676b.png)
+![订单管理页：管理员查询管理平台的所有订单信息](docs/images/13-ding-dan-guan-li.png)
 
 订单详情页：管理员查看指定订单的全部详细信息
 
-![订单详情页：管理员查看指定订单的全部详细信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/a1c3a413-d08e-4c48-81ae-cf80b38f9e33.png)
+![订单详情页：管理员查看指定订单的全部详细信息](docs/images/14-ding-dan-xiang-qing.png)
 
 
 ###### 用户Web端
@@ -125,83 +125,83 @@
 
 注册页：填写信息完成注册，加入积分商城
 
-![注册页：填写信息完成注册，加入积分商城](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/247848c1-f05f-4f83-88ed-1967b9b93dc5.png)
+![注册页：填写信息完成注册，加入积分商城](docs/images/15-zhu-ce.png)
 
 登录页：用户输入账号密码，登录积分商城平台
 
-![登录页：用户输入账号密码，登录积分商城平台](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/6a3b62eb-dab9-41ae-8ca8-2a6ceec4e5aa.png)
+![登录页：用户输入账号密码，登录积分商城平台](docs/images/16-deng-lu.png)
 
 首页：展示问答列表与平台最新公告
 
-![首页：展示问答列表与平台最新公告](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/669f7c87-5924-4498-8f30-537a7129dee9.png)
+![首页：展示问答列表与平台最新公告](docs/images/17-shou-ye.png)
 
 首页：展示平台最新博文与最新问答内容
 
-![首页：展示平台最新博文与最新问答内容](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/2e867045-3c7e-4564-8974-96562a78db75.png)
+![首页：展示平台最新博文与最新问答内容](docs/images/18-shou-ye.png)
 
 公告页：查看管理员发布的平台公告信息
 
-![公告页：查看管理员发布的平台公告信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/2be01972-b090-4064-8d90-421b61c26e54.png)
+![公告页：查看管理员发布的平台公告信息](docs/images/19-gong-gao.png)
 
 公告详情页：查看平台后续建设规划公告内容
 
-![公告详情页：查看平台后续建设规划公告内容](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/f1d0d7cc-5b9c-4081-89e0-97439b59b151.png)
+![公告详情页：查看平台后续建设规划公告内容](docs/images/20-gong-gao-xiang-qing.png)
 
 商品列表页：展示积分商城中可兑换购买的各类商品
 
-![商品列表页：展示积分商城中可兑换购买的各类商品](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/aacf6c76-db5c-48dd-84ab-b62de2f6c24d.png)
+![商品列表页：展示积分商城中可兑换购买的各类商品](docs/images/21-shang-pin-lie-biao.png)
 
 详情页：展示蓝牙无线耳机商品信息，支持购买和积分兑换
 
-![详情页：展示蓝牙无线耳机商品信息，支持购买和积分兑换](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/10803073-cbe6-4319-8d30-fe3a81b4e512.png)
+![详情页：展示蓝牙无线耳机商品信息，支持购买和积分兑换](docs/images/22-xiang-qing.png)
 
 购物车：管理购物车商品，可批量删除和修改商品数量
 
-![购物车：管理购物车商品，可批量删除和修改商品数量](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/9fe357db-23d8-4478-8442-4e5c9383e974.png)
+![购物车：管理购物车商品，可批量删除和修改商品数量](docs/images/23-gou-wu-che.png)
 
 购物车：管理购物车内待兑换或购买的商品
 
-![购物车：管理购物车内待兑换或购买的商品](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/9c05b043-4b73-4494-8259-9a3121513eb7.png)
+![购物车：管理购物车内待兑换或购买的商品](docs/images/24-gou-wu-che.png)
 
 订单确认页：确认商品订单，填写收货信息后进行支付
 
-![订单确认页：确认商品订单，填写收货信息后进行支付](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/7e0d120c-3e93-4bc6-8ba2-edf83886ddd7.png)
+![订单确认页：确认商品订单，填写收货信息后进行支付](docs/images/25-ding-dan-que-ren.png)
 
 订单页：查看个人历史订单，可对待付款订单付款
 
-![订单页：查看个人历史订单，可对待付款订单付款](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/96533f25-d80e-41db-85f3-052422d36f90.png)
+![订单页：查看个人历史订单，可对待付款订单付款](docs/images/26-ding-dan.png)
 
 问答列表页：浏览全部问答，支持搜索和发布新问答
 
-![问答列表页：浏览全部问答，支持搜索和发布新问答](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/6520bfb2-7d21-420c-8ec5-4f510ac8b6a1.png)
+![问答列表页：浏览全部问答，支持搜索和发布新问答](docs/images/27-wen-da-lie-biao.png)
 
 问答详情页：查看问答详情，可对该问题发表回复
 
-![问答详情页：查看问答详情，可对该问题发表回复](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/bc5f8414-3623-4f79-8a7d-ceb44b477be3.png)
+![问答详情页：查看问答详情，可对该问题发表回复](docs/images/28-wen-da-xiang-qing.png)
 
 发布问答页：填写新问答信息，提交平台审核发布
 
-![发布问答页：填写新问答信息，提交平台审核发布](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/644f9817-d5fe-4873-8861-b77da38aeae8.png)
+![发布问答页：填写新问答信息，提交平台审核发布](docs/images/29-fa-bu-wen-da.png)
 
 博文列表页：浏览不同分类下已审核通过的博文
 
-![博文列表页：浏览不同分类下已审核通过的博文](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/0978fbd5-b4b7-41db-88f4-1fe5d828d06d.png)
+![博文列表页：浏览不同分类下已审核通过的博文](docs/images/30-bo-wen-lie-biao.png)
 
 博文详情页：查看一篇关于Vue3组合式API的博文
 
-![博文详情页：查看一篇关于Vue3组合式API的博文](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/c3927704-a8c0-4493-892a-d110250e488a.png)
+![博文详情页：查看一篇关于Vue3组合式API的博文](docs/images/31-bo-wen-xiang-qing.png)
 
 博文发布页：填写博文信息，提交新博文等待平台审核
 
-![博文发布页：填写博文信息，提交新博文等待平台审核](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/7cdf8247-26b2-43ef-88cc-ddff9685029e.png)
+![博文发布页：填写博文信息，提交新博文等待平台审核](docs/images/32-bo-wen-fa-bu.png)
 
 我的问答列表页：查看并管理自己提交的问答回复
 
-![我的问答列表页：查看并管理自己提交的问答回复](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/64457236-8aca-4289-8ede-a08f4800ccf6.png)
+![我的问答列表页：查看并管理自己提交的问答回复](docs/images/33-wo-de-wen-da-lie-biao.png)
 
 积分记录页：查看个人积分的获取与消耗变动记录
 
-![积分记录页：查看个人积分的获取与消耗变动记录](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/164cec4f-2c5a-4fe6-8ab2-383d2f4c18ab.png)
+![积分记录页：查看个人积分的获取与消耗变动记录](docs/images/34-ji-fen-ji-lu.png)
 
 
 ## 五、主要业务流程
